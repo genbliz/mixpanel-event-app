@@ -3,23 +3,15 @@
 import { useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import mixpanel from "@/lib/mixpanel";
+import { DefinedEventNames } from "../helpers/defined-events";
 
-export function usePageTracking() {
+export default function useMixpanelPageTracking() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
   useEffect(() => {
     if (!pathname) return;
     const url = pathname + (searchParams.toString() ? `?${searchParams}` : "");
-    mixpanel.track("Page Viewed", { path: url });
+    mixpanel.track(DefinedEventNames.PAGE_VIEWED, { path: url });
   }, [pathname, searchParams]);
-}
-
-export function trackEvent(name: string, props?: Record<string, unknown>) {
-  mixpanel.track(name, props);
-}
-
-export function identifyUser(id: string, traits?: Record<string, unknown>) {
-  mixpanel.identify(id);
-  if (traits) mixpanel.people.set(traits);
 }

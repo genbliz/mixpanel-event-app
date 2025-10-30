@@ -1,9 +1,9 @@
 "use client";
 
 import { ReactNode } from "react";
-import { usePageTracking } from "@/hooks/useAnalytics";
+import useMixpanelPageTracking from "@/hooks/useMixpanelPageTracking";
 
 export default function AnalyticsProvider({ children }: { children: ReactNode }) {
-  usePageTracking();
+  useMixpanelPageTracking();
   return <>{children}</>;
 }

@@ -5,7 +5,7 @@ const MIXPANEL_TOKEN = process.env.NEXT_PUBLIC_MIXPANEL_TOKEN!;
 if (typeof window !== "undefined") {
   mixpanel.init(MIXPANEL_TOKEN, {
     debug: process.env.NODE_ENV !== "production",
-    track_pageview: false, // We'll handle this manually
+    track_pageview: false,
   });
 
   mixpanel.register({

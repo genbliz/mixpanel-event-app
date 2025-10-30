@@ -1,0 +1,4 @@
+export const DefinedEventNames = {
+  SIGNUP_BUTTON_CLICKED: "SIGNUP_BUTTON_CLICKED",
+  PAGE_VIEWED: "PAGE_VIEWED",
+};
