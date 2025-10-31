@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import AnalyticsProvider from "@/components/AnalyticsProvider";
+import MixpanelAnalyticsProvider from "@/components/MixpanelAnalyticsProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -11,7 +11,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
-        <AnalyticsProvider>{children}</AnalyticsProvider>
+        <MixpanelAnalyticsProvider>{children}</MixpanelAnalyticsProvider>
       </body>
     </html>
   );

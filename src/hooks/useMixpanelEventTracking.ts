@@ -1,17 +1,8 @@
 "use client";
 
-import mixpanel from "@/lib/mixpanel";
+import { mixpanel, isMixpanelInitialized } from "@/lib/mixpanel";
 
 export default function useMixpanelEventTracking() {
-  function trackEvent(name: string, props?: Record<string, unknown>) {
-    mixpanel.track(name, props);
-  }
-
-  function identifyUser(id: string, traits?: Record<string, unknown>) {
-    mixpanel.identify(id);
-    if (traits) mixpanel.people.set(traits);
-  }
-
   function identifyUserAddTrackEvent({
     user,
     event,
@@ -26,6 +17,8 @@ export default function useMixpanelEventTracking() {
     } | null;
     event: { name: string; data?: Record<string, unknown> };
   }) {
+    if (!isMixpanelInitialized) return;
+
     if (user?.id) {
       mixpanel.identify(user.id);
 
@@ -48,5 +41,5 @@ export default function useMixpanelEventTracking() {
     }
   }
 
-  return { trackEvent, identifyUser, identifyUserAddTrackEvent };
+  return { identifyUserAddTrackEvent };
 }

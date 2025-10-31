@@ -1,7 +1,7 @@
 "use client";
 
 import useMixpanelEventTracking from "@/hooks/useMixpanelEventTracking";
-import { DefinedEventNames } from "../helpers/defined-events";
+import { DefinedEventNames } from "@/helpers/defined-events";
 
 export default function HomePage() {
   const { identifyUserAddTrackEvent } = useMixpanelEventTracking();

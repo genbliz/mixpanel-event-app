@@ -3,7 +3,7 @@
 import { ReactNode } from "react";
 import useMixpanelPageTracking from "@/hooks/useMixpanelPageTracking";
 
-export default function AnalyticsProvider({ children }: { children: ReactNode }) {
+export default function MixpanelAnalyticsProvider({ children }: { children: ReactNode }) {
   useMixpanelPageTracking();
   return <>{children}</>;
 }
