@@ -19,25 +19,29 @@ export default function useMixpanelEventTracking() {
   }) {
     if (!isMixpanelInitialized) return;
 
-    if (user?.id) {
-      mixpanel.identify(user.id);
+    try {
+      if (user?.id) {
+        mixpanel.identify(user.id);
 
-      let infoData: Record<string, unknown> = {};
+        let infoData: Record<string, unknown> = {};
 
-      if (user.otherInfo) {
-        infoData = { ...infoData, ...user.otherInfo };
+        if (user.otherInfo) {
+          infoData = { ...infoData, ...user.otherInfo };
+        }
+
+        if (user.basicInfo) {
+          infoData = { ...infoData, ...user.basicInfo };
+        }
+
+        if (Object.keys(infoData)) {
+          mixpanel.people.set(infoData);
+        }
       }
-
-      if (user.basicInfo) {
-        infoData = { ...infoData, ...user.basicInfo };
+      if (event?.name) {
+        mixpanel.track(event.name, event.data);
       }
-
-      if (Object.keys(infoData)) {
-        mixpanel.people.set(infoData);
-      }
-    }
-    if (event?.name) {
-      mixpanel.track(event.name, event.data);
+    } catch (error) {
+      console.error(error);
     }
   }
 

@@ -10,9 +10,13 @@ export default function useMixpanelPageTracking() {
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    if (!pathname) return;
-    if (!isMixpanelInitialized) return;
-    const url = pathname + (searchParams.toString() ? `?${searchParams}` : "");
-    mixpanel.track(DefinedEventNames.PAGE_VIEWED, { path: url });
+    try {
+      if (!pathname) return;
+      if (!isMixpanelInitialized) return;
+      const url = pathname + (searchParams.toString() ? `?${searchParams}` : "");
+      mixpanel.track(DefinedEventNames.PAGE_VIEWED, { path: url });
+    } catch (error) {
+      console.error(error);
+    }
   }, [pathname, searchParams]);
 }
